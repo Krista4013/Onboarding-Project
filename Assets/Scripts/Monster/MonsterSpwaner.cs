@@ -69,17 +69,17 @@ public class MonsterSpawner : MonoBehaviour
 
                 if (attackComponent != null)
                 {
-                    attackComponent.InitializeAttack();
+                    attackComponent.InitializeAttack(1f); // 공격 딜레이를 설정합니다.
                 }
 
                 if (takeDamageComponent != null)
                 {
-                    takeDamageComponent.InitializeHealth(selectedMonsterData.health);
+                    takeDamageComponent.health = selectedMonsterData.health; // 체력 설정
                 }
 
                 if (movementComponent != null)
                 {
-                    movementComponent.InitializeMovement(selectedMonsterData.speed);
+                    movementComponent.InitializeMovement(selectedMonsterData.speed); // 속도 설정
                 }
             }
         }

@@ -2,27 +2,37 @@ using UnityEngine;
 
 public class MonsterTakeDamage : MonoBehaviour
 {
-    public event System.Action OnDeath; // 몬스터가 죽을 때 발생하는 이벤트
+    public int health;
 
-    private int currentHealth;
+    private Animator animator;
 
-    public void InitializeHealth(int health)
+    void Start()
     {
-        currentHealth = health;
+        animator = GetComponent<Animator>();
     }
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-
-        if (currentHealth <= 0)
+        health -= damage;
+        if (health <= 0)
         {
             Die();
         }
+        else
+        {
+            if (animator != null)
+            {
+                animator.SetTrigger("isHit");
+            }
+        }
     }
 
-    private void Die()
+    void Die()
     {
-        OnDeath?.Invoke(); // OnDeath 이벤트 호출
+        if (animator != null)
+        {
+            animator.SetTrigger("isDie");
+        }
+        Destroy(gameObject);
     }
 }

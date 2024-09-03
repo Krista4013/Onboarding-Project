@@ -11,9 +11,12 @@ GameObject:
   - component: {fileID: 969001167750703768}
   - component: {fileID: 6326719290513673513}
   - component: {fileID: 4138242551806618867}
-  - component: {fileID: 5875355696979197821}
   - component: {fileID: 2140536335951260219}
-  - component: {fileID: 7003168249700120762}
+  - component: {fileID: 366844416740822901}
+  - component: {fileID: 8257988487380934633}
+  - component: {fileID: 2943015997685560872}
+  - component: {fileID: 5974108050028208277}
+  - component: {fileID: 2511393640015876838}
   m_Layer: 6
   m_Name: Elite Orc
   m_TagString: Untagged
@@ -109,26 +112,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5875355696979197821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2016304122545442233}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfeb5099c3512e84bbcbfa14997e4273, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monsterName: 
-  grade: 
-  speed: 0
-  health: 0
-  detectionRadius: 5
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!50 &2140536335951260219
 Rigidbody2D:
   serializedVersion: 4
@@ -156,8 +139,67 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!70 &7003168249700120762
-CapsuleCollider2D:
+--- !u!114 &366844416740822901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016304122545442233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c075c325aa228d34ba80d64bd0565472, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterName: 
+  grade: 
+  speed: 0
+  health: 0
+--- !u!114 &8257988487380934633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016304122545442233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd876c7f4be9824e9fb0c11aed4a145, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDelay: 1
+--- !u!114 &2943015997685560872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016304122545442233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99cf952e027709147a4f558706835148, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  detectionRadius: 2
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &5974108050028208277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016304122545442233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 410165a50b7a7ae48ba5bc7fa44ab5f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+--- !u!61 &2511393640015876838
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -188,6 +230,16 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.31425864, y: -0.027728796}
-  m_Size: {x: 0.9270383, y: 1.3152404}
-  m_Direction: 0
+  m_Offset: {x: 0.2686283, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.5555556, y: 1.4444444}
+    newSize: {x: 1, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.018299, y: 1.4444444}
+  m_EdgeRadius: 0

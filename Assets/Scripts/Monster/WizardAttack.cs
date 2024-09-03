@@ -1,16 +1,11 @@
 using UnityEngine;
 
-public class MonsterAttack : MonoBehaviour
+public class WizardAttack : MonoBehaviour
 {
     public float attackDelay = 1f;
     private float lastAttackTime;
     private Animator animator;
     private MonsterMovement monsterMovement;
-
-    public void InitializeAttack(float delay)
-    {
-        attackDelay = delay;
-    }
 
     void Start()
     {

@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 
 public class MonsterMovement : MonoBehaviour
 {
     public float speed;
-    public float detectionRadius = 2f;
+    public float detectionRadius;
     public LayerMask playerLayer;
 
     private bool isPlayerDetected = false;
@@ -13,12 +14,6 @@ public class MonsterMovement : MonoBehaviour
     public void InitializeMovement(float speedValue)
     {
         speed = speedValue;
-
-        // Wizard의 경우 감지 범위를 조정
-        if (GetComponent<WizardAttack>() != null)
-        {
-            detectionRadius = 6f; // Wizard의 넓은 감지 범위
-        }
     }
 
     void Start()
@@ -48,11 +43,18 @@ public class MonsterMovement : MonoBehaviour
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, detectionRadius, playerLayer);
 
+        Debug.Log($"Detection Radius: {detectionRadius}");
+        Debug.Log($"Layer Mask Value: {playerLayer.value}"); // 비트마스크 값 출력
+
         if (hits.Length > 0)
         {
             isPlayerDetected = true;
             playerTransform = hits[0].transform;
-            Debug.Log($"플레이어와 조우함");
+            Debug.Log("플레이어와 조우함");
+        }
+        else
+        {
+            Debug.Log("플레이어 감지되지 않음");
         }
     }
 
@@ -64,5 +66,12 @@ public class MonsterMovement : MonoBehaviour
     public Transform GetPlayerTransform()
     {
         return playerTransform;
+    }
+
+    // Gizmos를 사용하여 감지 범위를 시각적으로 표시
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;  // 감지 범위 색상 설정
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);  // 감지 범위 표시
     }
 }

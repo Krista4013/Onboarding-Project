@@ -184,7 +184,7 @@ MonoBehaviour:
   detectionRadius: 2
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
 --- !u!114 &7444398362505455710
 MonoBehaviour:
   m_ObjectHideFlags: 0

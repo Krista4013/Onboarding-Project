@@ -19,7 +19,7 @@ public class Monster : MonoBehaviour
         speed = data.speed;
         health = data.health;
 
-        // 컴포넌트 초기화
+        // 하위 컴포넌트 초기화
         attackComponent = GetComponent<MonsterAttack>();
         takeDamageComponent = GetComponent<MonsterTakeDamage>();
         movementComponent = GetComponent<MonsterMovement>();
@@ -32,7 +32,7 @@ public class Monster : MonoBehaviour
         if (takeDamageComponent != null)
         {
             takeDamageComponent.InitializeHealth(health);
-            takeDamageComponent.OnDeath += Die; // 죽음 이벤트
+            takeDamageComponent.OnDeath += Die; // 죽음 이벤트 연결
         }
 
         if (movementComponent != null)
@@ -43,9 +43,7 @@ public class Monster : MonoBehaviour
 
     private void Die()
     {
-        // 몬스터가 죽음 이벤트 호출
-        OnMonsterDeath?.Invoke();
-        // 몬스터 제거
-        Destroy(gameObject);
+        OnMonsterDeath?.Invoke(); // 몬스터가 죽을 때 OnMonsterDeath 이벤트 호출
+        Destroy(gameObject); // 몬스터 오브젝트 제거
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MonsterDataLoader : MonoBehaviour
 {
-    public string fileName = "SampleMonster.csv";
+    public string fileName = "SampleMonster";
 
     public class MonsterData
     {
@@ -14,11 +14,6 @@ public class MonsterDataLoader : MonoBehaviour
     }
 
     public List<MonsterData> Monster = new List<MonsterData>();
-
-    void Start()
-    {
-        LoadMonsterData();
-    }
 
     public void LoadMonsterData()
     {

@@ -11,15 +11,6 @@ public class Scroller : MonoBehaviour
     private Vector2 groundOffset;
     private Vector2 decorateOffset;
 
-    void Start()
-    {
-        if (backgroundRenderer == null || groundRenderer == null || decorateRenderer == null)
-        {
-            Debug.Log("null");
-            this.enabled = false;
-        }
-    }
-
     void Update()
     {
         // ¹è°æ

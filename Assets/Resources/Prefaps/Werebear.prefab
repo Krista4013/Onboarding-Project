@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7299876175111672227}
   - component: {fileID: 3231409616169294744}
   - component: {fileID: 3991368002831738357}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Werebear
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -44,7 +44,10 @@ public class MonsterSpawner : MonoBehaviour
 
         MonsterDataLoader.MonsterData selectedMonsterData = monsterDataList[randomIndex];
         string monsterPrefabName = selectedMonsterData.name;
-        GameObject monsterPrefab = Resources.Load<GameObject>("Monsters - " + monsterPrefabName);
+
+        // Resources 폴더 내의 경로를 맞춰줍니다. 예를 들어, Prefabs 폴더 내에 있을 경우:
+        string fullPath = "Prefabs/" + monsterPrefabName;
+        GameObject monsterPrefab = Resources.Load<GameObject>(fullPath);
 
         if (monsterPrefab != null)
         {

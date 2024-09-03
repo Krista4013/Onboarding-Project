@@ -41,12 +41,12 @@ public class MonsterSpawner : MonoBehaviour
         if (!isSpawning) return;
 
         int randomIndex = Random.Range(0, monsterDataList.Count);
-
         MonsterDataLoader.MonsterData selectedMonsterData = monsterDataList[randomIndex];
         string monsterPrefabName = selectedMonsterData.name;
 
-        // Resources 폴더 내의 경로를 맞춰줍니다. 예를 들어, Prefabs 폴더 내에 있을 경우:
-        string fullPath = "Prefabs/" + monsterPrefabName;
+        string fullPath = "Prefabs/Monsters/" + monsterPrefabName;
+        Debug.Log("Attempting to load prefab at path: " + fullPath);
+
         GameObject monsterPrefab = Resources.Load<GameObject>(fullPath);
 
         if (monsterPrefab != null)
@@ -56,13 +56,36 @@ public class MonsterSpawner : MonoBehaviour
             Monster monsterComponent = spawnedMonster.GetComponent<Monster>();
             if (monsterComponent != null)
             {
+                // 몬스터 초기화
                 monsterComponent.Initialize(selectedMonsterData);
+
+                // 이벤트 핸들러 연결
                 monsterComponent.OnMonsterDeath += HandleMonsterDeath;
+
+                // 필요한 하위 컴포넌트 초기화
+                var attackComponent = spawnedMonster.GetComponent<MonsterAttack>();
+                var takeDamageComponent = spawnedMonster.GetComponent<MonsterTakeDamage>();
+                var movementComponent = spawnedMonster.GetComponent<MonsterMovement>();
+
+                if (attackComponent != null)
+                {
+                    attackComponent.InitializeAttack();
+                }
+
+                if (takeDamageComponent != null)
+                {
+                    takeDamageComponent.InitializeHealth(selectedMonsterData.health);
+                }
+
+                if (movementComponent != null)
+                {
+                    movementComponent.InitializeMovement(selectedMonsterData.speed);
+                }
             }
         }
         else
         {
-            Debug.LogError("not found" + monsterPrefabName);
+            Debug.LogError("Prefab not found at path: " + fullPath);
         }
     }
 

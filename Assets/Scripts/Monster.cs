@@ -6,14 +6,11 @@ public class Monster : MonoBehaviour
     public string grade;
     public float speed;
     public int health;
-    public float detectionRadius = 5f; // 플레이어 감지 범위
-    public LayerMask playerLayer; // 플레이어 레이어 마스크
+    public event System.Action OnMonsterDeath; // OnMonsterDeath 이벤트 추가
 
-    private bool isPlayerDetected = false;
-    private Transform playerTransform;
-    private Animator animator;
-
-    public event System.Action OnMonsterDeath;
+    private MonsterAttack attackComponent;
+    private MonsterTakeDamage takeDamageComponent;
+    private MonsterMovement movementComponent;
 
     public void Initialize(MonsterDataLoader.MonsterData data)
     {
@@ -21,69 +18,32 @@ public class Monster : MonoBehaviour
         grade = data.grade;
         speed = data.speed;
         health = data.health;
-    }
 
-    void Update()
-    {
-        if (!isPlayerDetected)
+        // 하위 컴포넌트 초기화
+        attackComponent = GetComponent<MonsterAttack>();
+        takeDamageComponent = GetComponent<MonsterTakeDamage>();
+        movementComponent = GetComponent<MonsterMovement>();
+
+        if (attackComponent != null)
         {
-            MoveLeft();
-            DetectPlayer();
+            attackComponent.InitializeAttack();
         }
-        else
+
+        if (takeDamageComponent != null)
         {
-            AttackPlayer();
+            takeDamageComponent.InitializeHealth(health);
+            takeDamageComponent.OnDeath += Die; // 죽음 이벤트 연결
         }
-    }
 
-    void MoveLeft()
-    {
-        // 왼쪽으로 이동
-        transform.Translate(Vector3.left * speed * Time.deltaTime);
-    }
-
-    void DetectPlayer()
-    {
-        // 플레이어가 있는지 확인
-        Collider[] hits = Physics.OverlapSphere(transform.position, detectionRadius, playerLayer);
-
-        if (hits.Length > 0)
+        if (movementComponent != null)
         {
-            isPlayerDetected = true;
-            playerTransform = hits[0].transform;
-            Debug.Log($"플레이어와 조우함");
+            movementComponent.InitializeMovement(speed);
         }
     }
 
-    void AttackPlayer()
+    private void Die()
     {
-        // 플레이어를 감지하면 멈추고 공격
-        if (playerTransform != null)
-        {
-            // 공격 애니메이션 실행 등을 할 수 있음
-            Debug.Log($"플레이어를 공격함");
-        }
-    }
-
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-
-        if (health <= 0)
-        {
-            Die();
-        }
-    }
-
-    public void Die()
-    {
-        OnMonsterDeath?.Invoke();  // 이벤트
-        Destroy(gameObject);  // 제거
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+        OnMonsterDeath?.Invoke(); // 몬스터가 죽을 때 OnMonsterDeath 이벤트 호출
+        Destroy(gameObject); // 몬스터 오브젝트 제거
     }
 }

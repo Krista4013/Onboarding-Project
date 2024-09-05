@@ -8,7 +8,7 @@ public class Monster : MonoBehaviour
     public int health;
     public Sprite monsterImage;
 
-    public GameObject monsterInfo;  // MonsterInfo UI 오브젝트
+    public GameObject monsterInfo;
 
     private SpriteRenderer spriteRenderer;
 

@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float detectionRadius = 8f;  // 몬스터 감지 범위
+    public float detectionRadius = 8f;
     public LayerMask monsterLayer;
     public GameObject projectilePrefab;
-    public Transform projectileSpawnPoint;  // 투사체 발사 위치
-    public float attackInterval = 1f;  // 공격 간격
-    public Animator animator;  // 애니메이터
+    public Transform projectileSpawnPoint;
+    public float attackInterval = 1f;
+    public Animator animator; 
 
     private float lastAttackTime;
 
@@ -53,10 +53,9 @@ public class Player : MonoBehaviour
             Projectile projectileComponent = projectile.GetComponent<Projectile>();
         }
     }
-    // Gizmos를 사용하여 감지 범위를 시각적으로 표시
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;  // 감지 범위 색상 설정
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);  // 감지 범위 표시
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 }

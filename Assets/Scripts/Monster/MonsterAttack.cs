@@ -35,9 +35,6 @@ public class MonsterAttack : MonoBehaviour
                 animator.SetTrigger("isAttack");
             }
             lastAttackTime = Time.time;
-
-            // 공격 로직 (예: 투사체 발사)
-            Debug.Log($"{name}이(가) 플레이어를 공격함");
         }
     }
 }

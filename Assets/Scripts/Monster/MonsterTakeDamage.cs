@@ -6,14 +6,14 @@ public class MonsterTakeDamage : MonoBehaviour
     public int currenthealth;
 
     private Animator animator;
-    private Monster monsterScript;  // Monster 스크립트 참조
+    private Monster monsterScript;
 
     public event System.Action OnMonsterDeath;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        monsterScript = GetComponent<Monster>();  // Monster 스크립트 가져오기
+        monsterScript = GetComponent<Monster>();
         currenthealth = health;
     }
 
@@ -31,7 +31,7 @@ public class MonsterTakeDamage : MonoBehaviour
     {
         animator.SetTrigger("isDie");
         OnMonsterDeath?.Invoke();
-        monsterScript.HideInfo();  // UI 숨기기
+        monsterScript.HideInfo();
         Destroy(gameObject);
     }
 }

@@ -33,7 +33,6 @@ public class WizardAttack : MonoBehaviour
             }
             lastAttackTime = Time.time;
 
-            // 파이어볼 발사
             ShootFireball();
         }
     }

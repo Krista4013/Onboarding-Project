@@ -42,15 +42,10 @@ public class MonsterDataLoader : MonoBehaviour
                 }
                 catch (System.Exception ex)
                 {
-                    Debug.LogError($"Failed to parse line {i + 1}: {lines[i]}");
-                    Debug.LogError($"Error: {ex.Message}");
+                    Debug.LogError($"Failed {i + 1}: {lines[i]}");
+                    Debug.LogError($"¿¡·¯ {ex.Message}");
                 }
             }
-            Debug.Log("Complete");
-        }
-        else
-        {
-            Debug.LogError($"Failed to load CSV file: {fileName}");
         }
     }
 }

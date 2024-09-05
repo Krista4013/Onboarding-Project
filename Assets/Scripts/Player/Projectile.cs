@@ -27,7 +27,6 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // 충돌한 오브젝트의 레이어 확인
         int collisionLayer = collision.gameObject.layer;
 
         if ((monsterLayer & (1 << collisionLayer)) != 0)
@@ -35,9 +34,9 @@ public class Projectile : MonoBehaviour
             MonsterTakeDamage monsterTakeDamage = collision.gameObject.GetComponent<MonsterTakeDamage>();
             if (monsterTakeDamage != null)
             {
-                monsterTakeDamage.TakeDamage(damage);  // 몬스터에게 대미지 적용
+                monsterTakeDamage.TakeDamage(damage);
             }
-            Destroy(gameObject);  // 투사체 제거
+            Destroy(gameObject);
         }
     }
 }

@@ -41,14 +41,12 @@ public class MonsterMovement : MonoBehaviour
 
     void DetectPlayer()
     {
-        // 원형 범위 내의 플레이어 감지
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, detectionRadius, playerLayer);
 
         if (hits.Length > 0)
         {
             isPlayerDetected = true;
             playerTransform = hits[0].transform;
-            Debug.Log($"플레이어와 조우함");
             animator.SetBool("isWalk", false);
         }
         else
@@ -67,10 +65,9 @@ public class MonsterMovement : MonoBehaviour
         return playerTransform;
     }
 
-    // Gizmos를 사용하여 감지 범위를 시각적으로 표시
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;  // 감지 범위 색상 설정
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);  // 감지 범위 표시
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 }

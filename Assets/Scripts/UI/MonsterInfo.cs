@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class MonsterInfo : MonoBehaviour
 {
-    public Text nameTxt;  // 몬스터 이름 텍스트
+    public Text nameTxt;
     public Text gradeTxt;
     public Text speedTxt;
     public Text HpTxt;

@@ -3,36 +3,35 @@ using UnityEngine;
 public class MonsterTakeDamage : MonoBehaviour
 {
     public int health;
+    public int currenthealth;
 
     private Animator animator;
+    private Monster monsterScript;  // Monster 스크립트 참조
+
+    public event System.Action OnMonsterDeath;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        monsterScript = GetComponent<Monster>();  // Monster 스크립트 가져오기
+        currenthealth = health;
     }
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        if (health <= 0)
+        currenthealth -= damage;
+        animator.SetTrigger("isHit");
+        if (currenthealth <= 0)
         {
             Die();
-        }
-        else
-        {
-            if (animator != null)
-            {
-                animator.SetTrigger("isHit");
-            }
         }
     }
 
     void Die()
     {
-        if (animator != null)
-        {
-            animator.SetTrigger("isDie");
-        }
+        animator.SetTrigger("isDie");
+        OnMonsterDeath?.Invoke();
+        monsterScript.HideInfo();  // UI 숨기기
         Destroy(gameObject);
     }
 }

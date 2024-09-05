@@ -5,10 +5,11 @@ using System.Collections.Generic;
 public class MonsterSpawner : MonoBehaviour
 {
     public Transform spawnPoint;  // 몬스터 스폰 위치
-    public float initialSpawnDelay = 8f;  // 초기 스폰 대기 시간
+    public float initialSpawnDelay;  // 초기 스폰 대기 시간
 
     private List<MonsterDataLoader.MonsterData> monsterDataList;
     private bool isSpawning = false;
+    private int currentMonsterIndex = 0;  // 현재 몬스터 인덱스
 
     public void InitializeSpawner(List<MonsterDataLoader.MonsterData> monsterData)
     {
@@ -38,10 +39,10 @@ public class MonsterSpawner : MonoBehaviour
 
     public void SpawnMonster()
     {
-        if (!isSpawning) return;
+        if (!isSpawning || monsterDataList == null || monsterDataList.Count == 0)
+            return;
 
-        int randomIndex = Random.Range(0, monsterDataList.Count);
-        MonsterDataLoader.MonsterData selectedMonsterData = monsterDataList[randomIndex];
+        MonsterDataLoader.MonsterData selectedMonsterData = monsterDataList[currentMonsterIndex];
         string monsterPrefabName = selectedMonsterData.name;
 
         string fullPath = "Prefabs/Monsters/" + monsterPrefabName;
@@ -59,9 +60,6 @@ public class MonsterSpawner : MonoBehaviour
                 // 몬스터 초기화
                 monsterComponent.Initialize(selectedMonsterData);
 
-                // 이벤트 핸들러 연결
-                monsterComponent.OnMonsterDeath += HandleMonsterDeath;
-
                 // 필요한 하위 컴포넌트 초기화
                 var attackComponent = spawnedMonster.GetComponent<MonsterAttack>();
                 var takeDamageComponent = spawnedMonster.GetComponent<MonsterTakeDamage>();
@@ -75,12 +73,22 @@ public class MonsterSpawner : MonoBehaviour
                 if (takeDamageComponent != null)
                 {
                     takeDamageComponent.health = selectedMonsterData.health; // 체력 설정
+
+                    takeDamageComponent.OnMonsterDeath += HandleMonsterDeath;
                 }
 
                 if (movementComponent != null)
                 {
                     movementComponent.InitializeMovement(selectedMonsterData.speed); // 속도 설정
                 }
+            }
+
+            // 다음 몬스터를 위한 인덱스 증가
+            currentMonsterIndex++;
+            if (currentMonsterIndex >= monsterDataList.Count)
+            {
+                // 마지막 몬스터가 생성된 후 인덱스를 0으로 리셋하여 반복하도록 설정
+                currentMonsterIndex = 0;
             }
         }
         else

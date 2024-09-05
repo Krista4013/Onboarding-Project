@@ -1,13 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
 
-    public Scroller scroller;
     public MonsterSpawner monsterSpawner;
     public MonsterDataLoader monsterDataLoader;
     public GameObject player;
+
+    public GameObject startBtn;
+    public GameObject restartBtn;
 
     private bool isGameActive = false;
 
@@ -24,14 +27,12 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         InitializeGame();
+
     }
 
     void InitializeGame()
     {
         isGameActive = false;
-        player.SetActive(false);
-
-        scroller.enabled = false;
 
         monsterDataLoader.LoadMonsterData();
 
@@ -41,30 +42,16 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         isGameActive = true;
-        player.SetActive(true);
-
-        scroller.enabled = true;
+        startBtn.SetActive(false);
+        restartBtn.SetActive(true);
 
         monsterSpawner.StartSpawning();
     }
 
-    public void EndGame()
-    {
-        isGameActive = false;
-
-        scroller.enabled = false;
-
-        monsterSpawner.StopSpawning();
-    }
-
-    public void GameOver()
-    {
-        EndGame();
-    }
-
     public void RestartGame()
     {
+        startBtn.SetActive(true);
+        restartBtn.SetActive(false);
         InitializeGame();
-        StartGame();
     }
 }

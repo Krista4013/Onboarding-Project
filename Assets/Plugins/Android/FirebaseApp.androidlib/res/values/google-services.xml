@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id">
+  <string name="gcm_defaultSenderId" translatable="false">853883334040</string>
+  <string name="google_storage_bucket" translatable="false">onboarding-project-90762.appspot.com</string>
+  <string name="project_id" translatable="false">onboarding-project-90762</string>
+  <string name="google_api_key" translatable="false">AIzaSyAcfL7ontF5oerirEIrRBawLlG0ORFNeGw</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAcfL7ontF5oerirEIrRBawLlG0ORFNeGw</string>
+  <string name="google_app_id" translatable="false">1:853883334040:android:dfeccbb326d92053a6cfed</string>
+</resources>

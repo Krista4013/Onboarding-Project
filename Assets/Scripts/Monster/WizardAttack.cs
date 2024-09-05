@@ -6,6 +6,8 @@ public class WizardAttack : MonoBehaviour
     private float lastAttackTime;
     private Animator animator;
     private MonsterMovement monsterMovement;
+    public GameObject fireballPrefab;
+    public Transform fireballSpawnPoint;
 
     void Start()
     {
@@ -31,8 +33,22 @@ public class WizardAttack : MonoBehaviour
             }
             lastAttackTime = Time.time;
 
-            // 공격 로직 (예: 투사체 발사)
-            Debug.Log($"{name}이(가) 플레이어를 공격함");
+            // 파이어볼 발사
+            ShootFireball();
+        }
+    }
+
+    void ShootFireball()
+    {
+        if (fireballPrefab != null && fireballSpawnPoint != null)
+        {
+            GameObject fireball = Instantiate(fireballPrefab, fireballSpawnPoint.position, Quaternion.identity);
+
+            FireBall fireBallScript = fireball.GetComponent<FireBall>();
+            if (fireBallScript != null)
+            {
+                fireBallScript.SetDirection(Vector2.left);
+            }
         }
     }
 }

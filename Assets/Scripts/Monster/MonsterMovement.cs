@@ -41,20 +41,19 @@ public class MonsterMovement : MonoBehaviour
 
     void DetectPlayer()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, detectionRadius, playerLayer);
-
-        Debug.Log($"Detection Radius: {detectionRadius}");
-        Debug.Log($"Layer Mask Value: {playerLayer.value}"); // 비트마스크 값 출력
+        // 원형 범위 내의 플레이어 감지
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, detectionRadius, playerLayer);
 
         if (hits.Length > 0)
         {
             isPlayerDetected = true;
             playerTransform = hits[0].transform;
-            Debug.Log("플레이어와 조우함");
+            Debug.Log($"플레이어와 조우함");
+            animator.SetBool("isWalk", false);
         }
         else
         {
-            Debug.Log("플레이어 감지되지 않음");
+            isPlayerDetected = false;
         }
     }
 

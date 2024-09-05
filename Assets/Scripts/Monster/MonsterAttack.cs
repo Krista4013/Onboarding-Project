@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MonsterAttack : MonoBehaviour
 {
-    public float attackDelay = 1f;
+    public float attackDelay = 5f;
     private float lastAttackTime;
     private Animator animator;
     private MonsterMovement monsterMovement;
